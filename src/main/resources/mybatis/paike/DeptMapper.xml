@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinayouthedu.zqzc.mapper.paike.DeptMapper">
+  <resultMap id="BaseResultMap" type="com.chinayouthedu.zqzc.entity.paike.Dept">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_dept_id" jdbcType="BIGINT" property="parentDeptId" />
+    <result column="organization_id" jdbcType="BIGINT" property="organizationId" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="dept_code" jdbcType="VARCHAR" property="deptCode" />
+    <result column="dept_type" jdbcType="VARCHAR" property="deptType" />
+    <result column="dept_status" jdbcType="VARCHAR" property="deptStatus" />
+    <result column="dept_sort" jdbcType="INTEGER" property="deptSort" />
+    <result column="system_status" jdbcType="VARCHAR" property="systemStatus" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, parent_dept_id, organization_id, dept_name, dept_code, dept_type, dept_status, 
+    dept_sort, system_status, description, create_time, update_time, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.DeptExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zczx_dept
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zczx_dept
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from zczx_dept
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.DeptExample">
+    delete from zczx_dept
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chinayouthedu.zqzc.entity.paike.Dept">
+    insert into zczx_dept (id, parent_dept_id, organization_id, 
+      dept_name, dept_code, dept_type, 
+      dept_status, dept_sort, system_status, 
+      description, create_time, update_time, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{parentDeptId,jdbcType=BIGINT}, #{organizationId,jdbcType=BIGINT}, 
+      #{deptName,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, #{deptType,jdbcType=VARCHAR}, 
+      #{deptStatus,jdbcType=VARCHAR}, #{deptSort,jdbcType=INTEGER}, #{systemStatus,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinayouthedu.zqzc.entity.paike.Dept">
+    insert into zczx_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentDeptId != null">
+        parent_dept_id,
+      </if>
+      <if test="organizationId != null">
+        organization_id,
+      </if>
+      <if test="deptName != null">
+        dept_name,
+      </if>
+      <if test="deptCode != null">
+        dept_code,
+      </if>
+      <if test="deptType != null">
+        dept_type,
+      </if>
+      <if test="deptStatus != null">
+        dept_status,
+      </if>
+      <if test="deptSort != null">
+        dept_sort,
+      </if>
+      <if test="systemStatus != null">
+        system_status,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentDeptId != null">
+        #{parentDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="deptName != null">
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptType != null">
+        #{deptType,jdbcType=VARCHAR},
+      </if>
+      <if test="deptStatus != null">
+        #{deptStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deptSort != null">
+        #{deptSort,jdbcType=INTEGER},
+      </if>
+      <if test="systemStatus != null">
+        #{systemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.DeptExample" resultType="java.lang.Long">
+    select count(*) from zczx_dept
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zczx_dept
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentDeptId != null">
+        parent_dept_id = #{record.parentDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="record.organizationId != null">
+        organization_id = #{record.organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.deptName != null">
+        dept_name = #{record.deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptCode != null">
+        dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptType != null">
+        dept_type = #{record.deptType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptStatus != null">
+        dept_status = #{record.deptStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptSort != null">
+        dept_sort = #{record.deptSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.systemStatus != null">
+        system_status = #{record.systemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zczx_dept
+    set id = #{record.id,jdbcType=BIGINT},
+      parent_dept_id = #{record.parentDeptId,jdbcType=BIGINT},
+      organization_id = #{record.organizationId,jdbcType=BIGINT},
+      dept_name = #{record.deptName,jdbcType=VARCHAR},
+      dept_code = #{record.deptCode,jdbcType=VARCHAR},
+      dept_type = #{record.deptType,jdbcType=VARCHAR},
+      dept_status = #{record.deptStatus,jdbcType=VARCHAR},
+      dept_sort = #{record.deptSort,jdbcType=INTEGER},
+      system_status = #{record.systemStatus,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinayouthedu.zqzc.entity.paike.Dept">
+    update zczx_dept
+    <set>
+      <if test="parentDeptId != null">
+        parent_dept_id = #{parentDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationId != null">
+        organization_id = #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="deptName != null">
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptType != null">
+        dept_type = #{deptType,jdbcType=VARCHAR},
+      </if>
+      <if test="deptStatus != null">
+        dept_status = #{deptStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deptSort != null">
+        dept_sort = #{deptSort,jdbcType=INTEGER},
+      </if>
+      <if test="systemStatus != null">
+        system_status = #{systemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinayouthedu.zqzc.entity.paike.Dept">
+    update zczx_dept
+    set parent_dept_id = #{parentDeptId,jdbcType=BIGINT},
+      organization_id = #{organizationId,jdbcType=BIGINT},
+      dept_name = #{deptName,jdbcType=VARCHAR},
+      dept_code = #{deptCode,jdbcType=VARCHAR},
+      dept_type = #{deptType,jdbcType=VARCHAR},
+      dept_status = #{deptStatus,jdbcType=VARCHAR},
+      dept_sort = #{deptSort,jdbcType=INTEGER},
+      system_status = #{systemStatus,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

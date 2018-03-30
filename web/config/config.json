@@ -1,0 +1,10 @@
+{
+  "development": {
+    "api": "http://10.3.30.4/",
+    "systemName": "智能排课系统"
+  },
+  "production": {
+    "api": "http://api.pes.qa.unicc.dev/",
+    "systemName": "智能排课系统"
+  }
+}

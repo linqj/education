@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinayouthedu.zqzc.mapper.paike.ElementMapper">
+  <resultMap id="BaseResultMap" type="com.chinayouthedu.zqzc.entity.paike.Element">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="function_id" jdbcType="BIGINT" property="functionId" />
+    <result column="element_code" jdbcType="VARCHAR" property="elementCode" />
+    <result column="element_name" jdbcType="VARCHAR" property="elementName" />
+    <result column="element_icon" jdbcType="VARCHAR" property="elementIcon" />
+    <result column="element_type" jdbcType="VARCHAR" property="elementType" />
+    <result column="element_status" jdbcType="VARCHAR" property="elementStatus" />
+    <result column="element_sort" jdbcType="INTEGER" property="elementSort" />
+    <result column="element_class" jdbcType="VARCHAR" property="elementClass" />
+    <result column="element_position" jdbcType="INTEGER" property="elementPosition" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, function_id, element_code, element_name, element_icon, element_type, element_status, 
+    element_sort, element_class, element_position, create_time, update_time, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.ElementExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zczx_element
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zczx_element
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from zczx_element
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.ElementExample">
+    delete from zczx_element
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chinayouthedu.zqzc.entity.paike.Element">
+    insert into zczx_element (id, function_id, element_code, 
+      element_name, element_icon, element_type, 
+      element_status, element_sort, element_class, 
+      element_position, create_time, update_time, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{functionId,jdbcType=BIGINT}, #{elementCode,jdbcType=VARCHAR}, 
+      #{elementName,jdbcType=VARCHAR}, #{elementIcon,jdbcType=VARCHAR}, #{elementType,jdbcType=VARCHAR}, 
+      #{elementStatus,jdbcType=VARCHAR}, #{elementSort,jdbcType=INTEGER}, #{elementClass,jdbcType=VARCHAR}, 
+      #{elementPosition,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinayouthedu.zqzc.entity.paike.Element">
+    insert into zczx_element
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="functionId != null">
+        function_id,
+      </if>
+      <if test="elementCode != null">
+        element_code,
+      </if>
+      <if test="elementName != null">
+        element_name,
+      </if>
+      <if test="elementIcon != null">
+        element_icon,
+      </if>
+      <if test="elementType != null">
+        element_type,
+      </if>
+      <if test="elementStatus != null">
+        element_status,
+      </if>
+      <if test="elementSort != null">
+        element_sort,
+      </if>
+      <if test="elementClass != null">
+        element_class,
+      </if>
+      <if test="elementPosition != null">
+        element_position,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="functionId != null">
+        #{functionId,jdbcType=BIGINT},
+      </if>
+      <if test="elementCode != null">
+        #{elementCode,jdbcType=VARCHAR},
+      </if>
+      <if test="elementName != null">
+        #{elementName,jdbcType=VARCHAR},
+      </if>
+      <if test="elementIcon != null">
+        #{elementIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="elementType != null">
+        #{elementType,jdbcType=VARCHAR},
+      </if>
+      <if test="elementStatus != null">
+        #{elementStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="elementSort != null">
+        #{elementSort,jdbcType=INTEGER},
+      </if>
+      <if test="elementClass != null">
+        #{elementClass,jdbcType=VARCHAR},
+      </if>
+      <if test="elementPosition != null">
+        #{elementPosition,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.ElementExample" resultType="java.lang.Long">
+    select count(*) from zczx_element
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zczx_element
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.functionId != null">
+        function_id = #{record.functionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.elementCode != null">
+        element_code = #{record.elementCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementName != null">
+        element_name = #{record.elementName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementIcon != null">
+        element_icon = #{record.elementIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementType != null">
+        element_type = #{record.elementType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementStatus != null">
+        element_status = #{record.elementStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementSort != null">
+        element_sort = #{record.elementSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.elementClass != null">
+        element_class = #{record.elementClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elementPosition != null">
+        element_position = #{record.elementPosition,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zczx_element
+    set id = #{record.id,jdbcType=BIGINT},
+      function_id = #{record.functionId,jdbcType=BIGINT},
+      element_code = #{record.elementCode,jdbcType=VARCHAR},
+      element_name = #{record.elementName,jdbcType=VARCHAR},
+      element_icon = #{record.elementIcon,jdbcType=VARCHAR},
+      element_type = #{record.elementType,jdbcType=VARCHAR},
+      element_status = #{record.elementStatus,jdbcType=VARCHAR},
+      element_sort = #{record.elementSort,jdbcType=INTEGER},
+      element_class = #{record.elementClass,jdbcType=VARCHAR},
+      element_position = #{record.elementPosition,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinayouthedu.zqzc.entity.paike.Element">
+    update zczx_element
+    <set>
+      <if test="functionId != null">
+        function_id = #{functionId,jdbcType=BIGINT},
+      </if>
+      <if test="elementCode != null">
+        element_code = #{elementCode,jdbcType=VARCHAR},
+      </if>
+      <if test="elementName != null">
+        element_name = #{elementName,jdbcType=VARCHAR},
+      </if>
+      <if test="elementIcon != null">
+        element_icon = #{elementIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="elementType != null">
+        element_type = #{elementType,jdbcType=VARCHAR},
+      </if>
+      <if test="elementStatus != null">
+        element_status = #{elementStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="elementSort != null">
+        element_sort = #{elementSort,jdbcType=INTEGER},
+      </if>
+      <if test="elementClass != null">
+        element_class = #{elementClass,jdbcType=VARCHAR},
+      </if>
+      <if test="elementPosition != null">
+        element_position = #{elementPosition,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinayouthedu.zqzc.entity.paike.Element">
+    update zczx_element
+    set function_id = #{functionId,jdbcType=BIGINT},
+      element_code = #{elementCode,jdbcType=VARCHAR},
+      element_name = #{elementName,jdbcType=VARCHAR},
+      element_icon = #{elementIcon,jdbcType=VARCHAR},
+      element_type = #{elementType,jdbcType=VARCHAR},
+      element_status = #{elementStatus,jdbcType=VARCHAR},
+      element_sort = #{elementSort,jdbcType=INTEGER},
+      element_class = #{elementClass,jdbcType=VARCHAR},
+      element_position = #{elementPosition,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.layout {
+  .layout-header {
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+
+    .layout-header-img {
+      display: inline-block;
+      width: 20px;
+      vertical-align: middle;
+    }
+
+    .layout-header-content {
+      color: #fff;
+      margin-left: 12px;
+    }
+  }
+
+  .header {
+    background: #fff;
+    border-bottom: 1px solid gray;
+    padding: 0 32px;
+  }
+
+  .ant-layout-content {
+    min-height: calc(~"100vh - 64px");
+    position: relative;
+    overflow: hidden;
+  }
+}
+

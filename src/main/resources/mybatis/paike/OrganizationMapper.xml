@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinayouthedu.zqzc.mapper.paike.OrganizationMapper">
+  <resultMap id="BaseResultMap" type="com.chinayouthedu.zqzc.entity.paike.Organization">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_organization_id" jdbcType="BIGINT" property="parentOrganizationId" />
+    <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
+    <result column="foreign_language_name" jdbcType="VARCHAR" property="foreignLanguageName" />
+    <result column="organization_abbreviation" jdbcType="VARCHAR" property="organizationAbbreviation" />
+    <result column="organization_nature" jdbcType="VARCHAR" property="organizationNature" />
+    <result column="organization_address" jdbcType="VARCHAR" property="organizationAddress" />
+    <result column="legal_person" jdbcType="VARCHAR" property="legalPerson" />
+    <result column="organization_founder" jdbcType="VARCHAR" property="organizationFounder" />
+    <result column="setup_time" jdbcType="TIMESTAMP" property="setupTime" />
+    <result column="listing_time" jdbcType="TIMESTAMP" property="listingTime" />
+    <result column="organization_type" jdbcType="VARCHAR" property="organizationType" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+    <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
+    <result column="zczx_code" jdbcType="VARCHAR" property="zczxCode" />
+    <result column="management_status" jdbcType="VARCHAR" property="managementStatus" />
+    <result column="business_term" jdbcType="VARCHAR" property="businessTerm" />
+    <result column="license_time" jdbcType="TIMESTAMP" property="licenseTime" />
+    <result column="zczx_capital" jdbcType="VARCHAR" property="zczxCapital" />
+    <result column="zczx_office" jdbcType="VARCHAR" property="zczxOffice" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="yearly_turnover" jdbcType="VARCHAR" property="yearlyTurnover" />
+    <result column="organization_mission" jdbcType="VARCHAR" property="organizationMission" />
+    <result column="organization_http" jdbcType="VARCHAR" property="organizationHttp" />
+    <result column="organization_culture" jdbcType="VARCHAR" property="organizationCulture" />
+    <result column="organization_partner" jdbcType="VARCHAR" property="organizationPartner" />
+    <result column="organization_shareholder" jdbcType="VARCHAR" property="organizationShareholder" />
+    <result column="organization_manager" jdbcType="VARCHAR" property="organizationManager" />
+    <result column="organization_other_info" jdbcType="VARCHAR" property="organizationOtherInfo" />
+    <result column="system_status" jdbcType="VARCHAR" property="systemStatus" />
+    <result column="business_scope" jdbcType="VARCHAR" property="businessScope" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="organization_sort" jdbcType="INTEGER" property="organizationSort" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, parent_organization_id, organization_name, foreign_language_name, organization_abbreviation, 
+    organization_nature, organization_address, legal_person, organization_founder, setup_time, 
+    listing_time, organization_type, industry, credit_code, organization_code, zczx_code, 
+    management_status, business_term, license_time, zczx_capital, zczx_office, stock_code, 
+    yearly_turnover, organization_mission, organization_http, organization_culture, organization_partner, 
+    organization_shareholder, organization_manager, organization_other_info, system_status, 
+    business_scope, create_time, update_time, organization_sort, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.OrganizationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zczx_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zczx_organization
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from zczx_organization
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.OrganizationExample">
+    delete from zczx_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chinayouthedu.zqzc.entity.paike.Organization">
+    insert into zczx_organization (id, parent_organization_id, organization_name, 
+      foreign_language_name, organization_abbreviation, 
+      organization_nature, organization_address, 
+      legal_person, organization_founder, setup_time, 
+      listing_time, organization_type, industry, 
+      credit_code, organization_code, zczx_code, 
+      management_status, business_term, license_time, 
+      zczx_capital, zczx_office, stock_code, 
+      yearly_turnover, organization_mission, organization_http, 
+      organization_culture, organization_partner, 
+      organization_shareholder, organization_manager, 
+      organization_other_info, system_status, business_scope, 
+      create_time, update_time, organization_sort, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{parentOrganizationId,jdbcType=BIGINT}, #{organizationName,jdbcType=VARCHAR}, 
+      #{foreignLanguageName,jdbcType=VARCHAR}, #{organizationAbbreviation,jdbcType=VARCHAR}, 
+      #{organizationNature,jdbcType=VARCHAR}, #{organizationAddress,jdbcType=VARCHAR}, 
+      #{legalPerson,jdbcType=VARCHAR}, #{organizationFounder,jdbcType=VARCHAR}, #{setupTime,jdbcType=TIMESTAMP}, 
+      #{listingTime,jdbcType=TIMESTAMP}, #{organizationType,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{creditCode,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, #{zczxCode,jdbcType=VARCHAR}, 
+      #{managementStatus,jdbcType=VARCHAR}, #{businessTerm,jdbcType=VARCHAR}, #{licenseTime,jdbcType=TIMESTAMP}, 
+      #{zczxCapital,jdbcType=VARCHAR}, #{zczxOffice,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, 
+      #{yearlyTurnover,jdbcType=VARCHAR}, #{organizationMission,jdbcType=VARCHAR}, #{organizationHttp,jdbcType=VARCHAR}, 
+      #{organizationCulture,jdbcType=VARCHAR}, #{organizationPartner,jdbcType=VARCHAR}, 
+      #{organizationShareholder,jdbcType=VARCHAR}, #{organizationManager,jdbcType=VARCHAR}, 
+      #{organizationOtherInfo,jdbcType=VARCHAR}, #{systemStatus,jdbcType=VARCHAR}, #{businessScope,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{organizationSort,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinayouthedu.zqzc.entity.paike.Organization">
+    insert into zczx_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentOrganizationId != null">
+        parent_organization_id,
+      </if>
+      <if test="organizationName != null">
+        organization_name,
+      </if>
+      <if test="foreignLanguageName != null">
+        foreign_language_name,
+      </if>
+      <if test="organizationAbbreviation != null">
+        organization_abbreviation,
+      </if>
+      <if test="organizationNature != null">
+        organization_nature,
+      </if>
+      <if test="organizationAddress != null">
+        organization_address,
+      </if>
+      <if test="legalPerson != null">
+        legal_person,
+      </if>
+      <if test="organizationFounder != null">
+        organization_founder,
+      </if>
+      <if test="setupTime != null">
+        setup_time,
+      </if>
+      <if test="listingTime != null">
+        listing_time,
+      </if>
+      <if test="organizationType != null">
+        organization_type,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="creditCode != null">
+        credit_code,
+      </if>
+      <if test="organizationCode != null">
+        organization_code,
+      </if>
+      <if test="zczxCode != null">
+        zczx_code,
+      </if>
+      <if test="managementStatus != null">
+        management_status,
+      </if>
+      <if test="businessTerm != null">
+        business_term,
+      </if>
+      <if test="licenseTime != null">
+        license_time,
+      </if>
+      <if test="zczxCapital != null">
+        zczx_capital,
+      </if>
+      <if test="zczxOffice != null">
+        zczx_office,
+      </if>
+      <if test="stockCode != null">
+        stock_code,
+      </if>
+      <if test="yearlyTurnover != null">
+        yearly_turnover,
+      </if>
+      <if test="organizationMission != null">
+        organization_mission,
+      </if>
+      <if test="organizationHttp != null">
+        organization_http,
+      </if>
+      <if test="organizationCulture != null">
+        organization_culture,
+      </if>
+      <if test="organizationPartner != null">
+        organization_partner,
+      </if>
+      <if test="organizationShareholder != null">
+        organization_shareholder,
+      </if>
+      <if test="organizationManager != null">
+        organization_manager,
+      </if>
+      <if test="organizationOtherInfo != null">
+        organization_other_info,
+      </if>
+      <if test="systemStatus != null">
+        system_status,
+      </if>
+      <if test="businessScope != null">
+        business_scope,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="organizationSort != null">
+        organization_sort,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentOrganizationId != null">
+        #{parentOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationName != null">
+        #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="foreignLanguageName != null">
+        #{foreignLanguageName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAbbreviation != null">
+        #{organizationAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationNature != null">
+        #{organizationNature,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAddress != null">
+        #{organizationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationFounder != null">
+        #{organizationFounder,jdbcType=VARCHAR},
+      </if>
+      <if test="setupTime != null">
+        #{setupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="listingTime != null">
+        #{listingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationType != null">
+        #{organizationType,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zczxCode != null">
+        #{zczxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="managementStatus != null">
+        #{managementStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTerm != null">
+        #{businessTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseTime != null">
+        #{licenseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zczxCapital != null">
+        #{zczxCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="zczxOffice != null">
+        #{zczxOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="yearlyTurnover != null">
+        #{yearlyTurnover,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationMission != null">
+        #{organizationMission,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationHttp != null">
+        #{organizationHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCulture != null">
+        #{organizationCulture,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPartner != null">
+        #{organizationPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationShareholder != null">
+        #{organizationShareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationManager != null">
+        #{organizationManager,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationOtherInfo != null">
+        #{organizationOtherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="systemStatus != null">
+        #{systemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null">
+        #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationSort != null">
+        #{organizationSort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.OrganizationExample" resultType="java.lang.Long">
+    select count(*) from zczx_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zczx_organization
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentOrganizationId != null">
+        parent_organization_id = #{record.parentOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.organizationName != null">
+        organization_name = #{record.organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foreignLanguageName != null">
+        foreign_language_name = #{record.foreignLanguageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationAbbreviation != null">
+        organization_abbreviation = #{record.organizationAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationNature != null">
+        organization_nature = #{record.organizationNature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationAddress != null">
+        organization_address = #{record.organizationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalPerson != null">
+        legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationFounder != null">
+        organization_founder = #{record.organizationFounder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.setupTime != null">
+        setup_time = #{record.setupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.listingTime != null">
+        listing_time = #{record.listingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.organizationType != null">
+        organization_type = #{record.organizationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null">
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditCode != null">
+        credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationCode != null">
+        organization_code = #{record.organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zczxCode != null">
+        zczx_code = #{record.zczxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managementStatus != null">
+        management_status = #{record.managementStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTerm != null">
+        business_term = #{record.businessTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseTime != null">
+        license_time = #{record.licenseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zczxCapital != null">
+        zczx_capital = #{record.zczxCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zczxOffice != null">
+        zczx_office = #{record.zczxOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockCode != null">
+        stock_code = #{record.stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearlyTurnover != null">
+        yearly_turnover = #{record.yearlyTurnover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationMission != null">
+        organization_mission = #{record.organizationMission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationHttp != null">
+        organization_http = #{record.organizationHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationCulture != null">
+        organization_culture = #{record.organizationCulture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationPartner != null">
+        organization_partner = #{record.organizationPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationShareholder != null">
+        organization_shareholder = #{record.organizationShareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationManager != null">
+        organization_manager = #{record.organizationManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationOtherInfo != null">
+        organization_other_info = #{record.organizationOtherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemStatus != null">
+        system_status = #{record.systemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessScope != null">
+        business_scope = #{record.businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.organizationSort != null">
+        organization_sort = #{record.organizationSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zczx_organization
+    set id = #{record.id,jdbcType=BIGINT},
+      parent_organization_id = #{record.parentOrganizationId,jdbcType=BIGINT},
+      organization_name = #{record.organizationName,jdbcType=VARCHAR},
+      foreign_language_name = #{record.foreignLanguageName,jdbcType=VARCHAR},
+      organization_abbreviation = #{record.organizationAbbreviation,jdbcType=VARCHAR},
+      organization_nature = #{record.organizationNature,jdbcType=VARCHAR},
+      organization_address = #{record.organizationAddress,jdbcType=VARCHAR},
+      legal_person = #{record.legalPerson,jdbcType=VARCHAR},
+      organization_founder = #{record.organizationFounder,jdbcType=VARCHAR},
+      setup_time = #{record.setupTime,jdbcType=TIMESTAMP},
+      listing_time = #{record.listingTime,jdbcType=TIMESTAMP},
+      organization_type = #{record.organizationType,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      organization_code = #{record.organizationCode,jdbcType=VARCHAR},
+      zczx_code = #{record.zczxCode,jdbcType=VARCHAR},
+      management_status = #{record.managementStatus,jdbcType=VARCHAR},
+      business_term = #{record.businessTerm,jdbcType=VARCHAR},
+      license_time = #{record.licenseTime,jdbcType=TIMESTAMP},
+      zczx_capital = #{record.zczxCapital,jdbcType=VARCHAR},
+      zczx_office = #{record.zczxOffice,jdbcType=VARCHAR},
+      stock_code = #{record.stockCode,jdbcType=VARCHAR},
+      yearly_turnover = #{record.yearlyTurnover,jdbcType=VARCHAR},
+      organization_mission = #{record.organizationMission,jdbcType=VARCHAR},
+      organization_http = #{record.organizationHttp,jdbcType=VARCHAR},
+      organization_culture = #{record.organizationCulture,jdbcType=VARCHAR},
+      organization_partner = #{record.organizationPartner,jdbcType=VARCHAR},
+      organization_shareholder = #{record.organizationShareholder,jdbcType=VARCHAR},
+      organization_manager = #{record.organizationManager,jdbcType=VARCHAR},
+      organization_other_info = #{record.organizationOtherInfo,jdbcType=VARCHAR},
+      system_status = #{record.systemStatus,jdbcType=VARCHAR},
+      business_scope = #{record.businessScope,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      organization_sort = #{record.organizationSort,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinayouthedu.zqzc.entity.paike.Organization">
+    update zczx_organization
+    <set>
+      <if test="parentOrganizationId != null">
+        parent_organization_id = #{parentOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationName != null">
+        organization_name = #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="foreignLanguageName != null">
+        foreign_language_name = #{foreignLanguageName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAbbreviation != null">
+        organization_abbreviation = #{organizationAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationNature != null">
+        organization_nature = #{organizationNature,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAddress != null">
+        organization_address = #{organizationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null">
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationFounder != null">
+        organization_founder = #{organizationFounder,jdbcType=VARCHAR},
+      </if>
+      <if test="setupTime != null">
+        setup_time = #{setupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="listingTime != null">
+        listing_time = #{listingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationType != null">
+        organization_type = #{organizationType,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        organization_code = #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zczxCode != null">
+        zczx_code = #{zczxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="managementStatus != null">
+        management_status = #{managementStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTerm != null">
+        business_term = #{businessTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseTime != null">
+        license_time = #{licenseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zczxCapital != null">
+        zczx_capital = #{zczxCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="zczxOffice != null">
+        zczx_office = #{zczxOffice,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null">
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="yearlyTurnover != null">
+        yearly_turnover = #{yearlyTurnover,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationMission != null">
+        organization_mission = #{organizationMission,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationHttp != null">
+        organization_http = #{organizationHttp,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCulture != null">
+        organization_culture = #{organizationCulture,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPartner != null">
+        organization_partner = #{organizationPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationShareholder != null">
+        organization_shareholder = #{organizationShareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationManager != null">
+        organization_manager = #{organizationManager,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationOtherInfo != null">
+        organization_other_info = #{organizationOtherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="systemStatus != null">
+        system_status = #{systemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null">
+        business_scope = #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organizationSort != null">
+        organization_sort = #{organizationSort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinayouthedu.zqzc.entity.paike.Organization">
+    update zczx_organization
+    set parent_organization_id = #{parentOrganizationId,jdbcType=BIGINT},
+      organization_name = #{organizationName,jdbcType=VARCHAR},
+      foreign_language_name = #{foreignLanguageName,jdbcType=VARCHAR},
+      organization_abbreviation = #{organizationAbbreviation,jdbcType=VARCHAR},
+      organization_nature = #{organizationNature,jdbcType=VARCHAR},
+      organization_address = #{organizationAddress,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      organization_founder = #{organizationFounder,jdbcType=VARCHAR},
+      setup_time = #{setupTime,jdbcType=TIMESTAMP},
+      listing_time = #{listingTime,jdbcType=TIMESTAMP},
+      organization_type = #{organizationType,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      organization_code = #{organizationCode,jdbcType=VARCHAR},
+      zczx_code = #{zczxCode,jdbcType=VARCHAR},
+      management_status = #{managementStatus,jdbcType=VARCHAR},
+      business_term = #{businessTerm,jdbcType=VARCHAR},
+      license_time = #{licenseTime,jdbcType=TIMESTAMP},
+      zczx_capital = #{zczxCapital,jdbcType=VARCHAR},
+      zczx_office = #{zczxOffice,jdbcType=VARCHAR},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      yearly_turnover = #{yearlyTurnover,jdbcType=VARCHAR},
+      organization_mission = #{organizationMission,jdbcType=VARCHAR},
+      organization_http = #{organizationHttp,jdbcType=VARCHAR},
+      organization_culture = #{organizationCulture,jdbcType=VARCHAR},
+      organization_partner = #{organizationPartner,jdbcType=VARCHAR},
+      organization_shareholder = #{organizationShareholder,jdbcType=VARCHAR},
+      organization_manager = #{organizationManager,jdbcType=VARCHAR},
+      organization_other_info = #{organizationOtherInfo,jdbcType=VARCHAR},
+      system_status = #{systemStatus,jdbcType=VARCHAR},
+      business_scope = #{businessScope,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      organization_sort = #{organizationSort,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

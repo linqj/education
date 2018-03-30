@@ -1,0 +1,56 @@
+@import '../Common';
+
+.arrange {
+  .arrange-content {
+    margin: 30px;
+  }
+}
+
+.schedule {
+  .schedule-search {
+    padding: 30px;
+    margin: 30px 30px 0;
+    background: #fff;
+
+    .schedule-search-item {
+      display: inline-block;
+      margin-right: 30px;
+    }
+  }
+
+  .schedule-search-table {
+    margin: 30px;
+
+    .schedule-search-table-content {
+      background: #fff;
+      padding: 0 30px 30px;
+    }
+  }
+}
+
+#drap {
+  position: relative;
+  width: 832px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  p {
+    text-align: center;
+  }
+
+  td {
+    height: 100px;
+
+  }
+
+  .drag-content {
+    position: absolute;
+    border: 1px solid #e9e9e9;
+    padding: 20px 40px;
+    border-radius: 20px;
+    background-color: rgb(192, 192, 192, 0.2);
+    display: none;
+    top: 0;
+    left: 0;
+  }
+}

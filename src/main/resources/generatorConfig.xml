@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="testTables" targetRuntime="MyBatis3">
+		<!-- 生成limit分页属性 【扩展插件】 -->
+		<!-- <plugin type="mybitisPlugin.PaginationPlugin" /> -->
+		<!--生成的实体类实现序列化接口 【扩展插件】 -->
+		<plugin type="com.chinayouthedu.zqzc.plugin.mybatis.SerializablePlugin" />
+		<!--生成的实体类重写toString方法 -->
+<!-- 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" /> -->
+		<!-- 生成的实体类重写hashCode和equals方法 -->
+<!-- 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" /> -->
+
+		<!-- 生成数据库字段注释及自定义注释 【扩展插件】 -->
+		<commentGenerator type="com.chinayouthedu.zqzc.plugin.mybatis.RemarksCommentGenerator">
+			<!-- 格式化java代码 -->
+			<property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+			<!-- 格式化XML代码 -->
+			<property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+			<!-- 开启抑制类型的警告信息 -->
+			<property name="suppressTypeWarnings" value="true" />
+			<!-- 生成的Java文件的默认编码 -->
+			<property name="javaFileEncoding" value="UTF-8" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+			<!-- 是否给实体类生成的注释 true：是 ： 默认为false:否 -->
+			<property name="addRemarkComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<!-- <commentGenerator> 是否去除自动生成的注释 true：是 ： false:否 <property name="suppressAllComments" 
+			value="true" /> <property name="suppressDate" value="true" /> </commentGenerator> -->
+
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://10.3.30.2/createcourse?characterEncoding=utf-8" userId="root"
+			password="root">
+		</jdbcConnection>
+		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
+			userId="yycg" password="yycg"> </jdbcConnection> -->
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="com.chinayouthedu.zqzc.entity.paike"
+			targetProject=".\src\main\java">
+			<!-- 基类继承 -->
+			<property name="rootClass" value="com.chinayouthedu.zqzc.config.core.BaseBean"/>
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- targetProject:mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="mybatis.paike"
+			targetProject=".\src\main\resources">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+<!-- 			<property name="enableSubPackages" value="false" /> -->
+		</sqlMapGenerator>
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.chinayouthedu.zqzc.mapper.paike"
+			targetProject=".\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+<!-- 			<property name="enableSubPackages" value="false" /> -->
+		</javaClientGenerator>
+		<!-- 指定数据库表 -->
+		<!-- 指定生成的表: tableName是数据库中的表名 domainObjectName是实体类名-->
+        <!-- mybatis generator代码生成器在默认的情况下会生成对于表实体类的一个Examle类,可以更改生成器的配置为false避免生成Examle类 -->
+        <!-- columnOverride:如果不存在则默认按数据库中字段类型创建实体类，如果存在则按以下指定的名称和类型创建实体类字段， -->
+        <!-- ignoreColumn:在实体类中不创建此属性 -->        
+<!-- 		<table schema="" tableName="%"  -->
+<!-- 		domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"  -->
+<!--        enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"> -->
+               <!-- <columnOverride column="username" property="name" />
+               <ignoreColumn column="password"/>
+               <columnOverride column="age" javaType="String"></columnOverride> -->
+			<!-- :如果设置为true,那么MBG会使用从数据库元数据获取的列名作为生成的实体对象的属性。 如果为false(默认值)，MGB将会尝试将返回的名称转换为驼峰形式。 在这两种情况下，
+			可以通过 元素显示指定，在这种情况下将会忽略这个（useActualColumnNames）属性 -->
+<!-- 			<property name="useActualColumnNames" value="true"></property> -->
+			<!-- 去除列前缀 -->
+<!-- 			<columnRenamingRule searchString="^[^_]+" replaceString=""/>   -->
+			<!-- 继承父类 -->
+			<!-- <property name="rootClass" value=""/> -->
+<!-- 		</table> -->
+		
+		<!-- paike: -->
+<!-- 		<table tableName="logs" domainObjectName="Logs"></table> -->
+<!-- 		<table tableName="classes" domainObjectName="Classes"></table> -->
+<!-- 		<table tableName="classroom"></table> -->
+<!-- 		<table tableName="classroom_building"></table> -->
+<!-- 		<table tableName="course"></table> -->
+<!-- 		<table tableName="course_teacher"></table> -->
+<!-- 		<table tableName="course_tgroup"></table> -->
+<!-- 		<table tableName="grade"></table> -->
+<!-- 		<table tableName="grade_class"></table> -->
+<!-- 		<table tableName="school_year"></table> -->
+<!-- 		<table tableName="semester"></table> -->
+<!-- 		<table tableName="student"></table> -->
+<!-- 		<table tableName="student_class"></table> -->
+<!--		<table tableName="teacher"></table>-->
+<!-- 		<table tableName="dictionary"></table> -->
+<!-- 		<table tableName="timetable_rule"></table> -->
+<!-- 		<table tableName="course_plan"></table> -->
+ 		<table tableName="teacher_coursetime"></table>
+<!-- 		<table tableName="time_tables"></table> -->
+<!-- 		<table tableName="teacher_class"></table> -->
+<!-- 		<table tableName="teacher_group"></table> -->
+<!-- 		<table tableName="teacher_tgroup"></table> -->
+<!-- 		<table tableName="timetable_course"></table> -->
+<!-- 		<table tableName="week_timetable"></table> -->
+<!-- 		<table tableName="zczx_user_permission_cache" domainObjectName="UserPermissionCache"> -->
+<!-- 			<columnOverride column="function_permission" jdbcType="VARCHAR" javaType="java.lang.String"/> -->
+<!-- 			<columnOverride column="data_permission" jdbcType="VARCHAR" javaType="java.lang.String"/> -->
+<!-- 		</table> -->
+		<!-- LONGVARCHAR -->
+		
+		
+		<!-- zczx: -->
+<!-- 		<table tableName="zczx_data_dictionary" domainObjectName="DataDictionary"></table> -->
+<!-- 		<table tableName="zczx_element" domainObjectName="Element"></table> -->
+<!-- 		<table tableName="zczx_function_permission" domainObjectName="FunctionPermission"></table> -->
+<!-- 		<table tableName="zczx_login" domainObjectName="Login"></table> -->
+<!-- 		<table tableName="zczx_product_function" domainObjectName="ProductFunction"></table> -->
+<!-- 		<table tableName="zczx_role" domainObjectName="Role"></table> -->
+<!-- 		<table tableName="zczx_role_ugroup" domainObjectName="RoleUgroup"></table> -->
+<!-- 		<table tableName="zczx_ugroup" domainObjectName="Ugroup"></table> -->
+<!-- 		<table tableName="zczx_user" domainObjectName="User"></table> -->
+<!-- 		<table tableName="zczx_user_role" domainObjectName="UserRole"></table> -->
+<!-- 		<table tableName="zczx_user_ugroup" domainObjectName="UserUgroup"></table> -->
+<!-- 		<table tableName="zczx_dept" domainObjectName="Dept"></table> -->
+<!-- 		<table tableName="zczx_product_role" domainObjectName="ProductRole"></table> -->
+<!-- 		<table tableName="zczx_organization" domainObjectName="Organization"></table> -->
+<!-- 		<table tableName="zczx_personnel" domainObjectName="Personnel"></table> -->
+<!-- 		<table tableName="zczx_personnel_archives" domainObjectName="PersonnelArchives"></table> -->
+<!-- 		<table tableName="zczx_user_personnel" domainObjectName="UserPersonnel"></table> -->
+
+	</context>
+</generatorConfiguration>

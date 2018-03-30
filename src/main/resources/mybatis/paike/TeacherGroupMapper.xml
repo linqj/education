@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinayouthedu.zqzc.mapper.paike.TeacherGroupMapper">
+  <resultMap id="BaseResultMap" type="com.chinayouthedu.zqzc.entity.paike.TeacherGroup">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tg_name" jdbcType="VARCHAR" property="tgName" />
+    <result column="tg_leader_id" jdbcType="BIGINT" property="tgLeaderId" />
+    <result column="tg_leader" jdbcType="VARCHAR" property="tgLeader" />
+    <result column="tg_leader_two_id" jdbcType="BIGINT" property="tgLeaderTwoId" />
+    <result column="tg_leader_two" jdbcType="VARCHAR" property="tgLeaderTwo" />
+    <result column="tg_lesson_leader_id" jdbcType="BIGINT" property="tgLessonLeaderId" />
+    <result column="tg_lesson_leader" jdbcType="VARCHAR" property="tgLessonLeader" />
+    <result column="tg_teacher_number" jdbcType="INTEGER" property="tgTeacherNumber" />
+    <result column="tg_code" jdbcType="VARCHAR" property="tgCode" />
+    <result column="course_discipline" jdbcType="VARCHAR" property="courseDiscipline" />
+    <result column="tg_course_name" jdbcType="VARCHAR" property="tgCourseName" />
+    <result column="tg_start_time" jdbcType="DATE" property="tgStartTime" />
+    <result column="tg_end_time" jdbcType="DATE" property="tgEndTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="sys_status" jdbcType="VARCHAR" property="sysStatus" />
+    <result column="effective" jdbcType="BIT" property="effective" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, tg_name, tg_leader_id, tg_leader, tg_leader_two_id, tg_leader_two, tg_lesson_leader_id, 
+    tg_lesson_leader, tg_teacher_number, tg_code, course_discipline, tg_course_name, 
+    tg_start_time, tg_end_time, create_time, update_time, status, sys_status, effective
+  </sql>
+  <select id="selectByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherGroupExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teacher_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher_group
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from teacher_group
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherGroupExample">
+    delete from teacher_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherGroup" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into teacher_group (id, tg_name, tg_leader_id, 
+      tg_leader, tg_leader_two_id, tg_leader_two, 
+      tg_lesson_leader_id, tg_lesson_leader, tg_teacher_number, 
+      tg_code, course_discipline, tg_course_name, 
+      tg_start_time, tg_end_time, create_time, 
+      update_time, status, sys_status, 
+      effective)
+    values (#{id,jdbcType=BIGINT}, #{tgName,jdbcType=VARCHAR}, #{tgLeaderId,jdbcType=BIGINT}, 
+      #{tgLeader,jdbcType=VARCHAR}, #{tgLeaderTwoId,jdbcType=BIGINT}, #{tgLeaderTwo,jdbcType=VARCHAR}, 
+      #{tgLessonLeaderId,jdbcType=BIGINT}, #{tgLessonLeader,jdbcType=VARCHAR}, #{tgTeacherNumber,jdbcType=INTEGER}, 
+      #{tgCode,jdbcType=VARCHAR}, #{courseDiscipline,jdbcType=VARCHAR}, #{tgCourseName,jdbcType=VARCHAR}, 
+      #{tgStartTime,jdbcType=DATE}, #{tgEndTime,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{sysStatus,jdbcType=VARCHAR}, 
+      #{effective,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherGroup">
+    insert into teacher_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tgName != null">
+        tg_name,
+      </if>
+      <if test="tgLeaderId != null">
+        tg_leader_id,
+      </if>
+      <if test="tgLeader != null">
+        tg_leader,
+      </if>
+      <if test="tgLeaderTwoId != null">
+        tg_leader_two_id,
+      </if>
+      <if test="tgLeaderTwo != null">
+        tg_leader_two,
+      </if>
+      <if test="tgLessonLeaderId != null">
+        tg_lesson_leader_id,
+      </if>
+      <if test="tgLessonLeader != null">
+        tg_lesson_leader,
+      </if>
+      <if test="tgTeacherNumber != null">
+        tg_teacher_number,
+      </if>
+      <if test="tgCode != null">
+        tg_code,
+      </if>
+      <if test="courseDiscipline != null">
+        course_discipline,
+      </if>
+      <if test="tgCourseName != null">
+        tg_course_name,
+      </if>
+      <if test="tgStartTime != null">
+        tg_start_time,
+      </if>
+      <if test="tgEndTime != null">
+        tg_end_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="sysStatus != null">
+        sys_status,
+      </if>
+      <if test="effective != null">
+        effective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tgName != null">
+        #{tgName,jdbcType=VARCHAR},
+      </if>
+      <if test="tgLeaderId != null">
+        #{tgLeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="tgLeader != null">
+        #{tgLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tgLeaderTwoId != null">
+        #{tgLeaderTwoId,jdbcType=BIGINT},
+      </if>
+      <if test="tgLeaderTwo != null">
+        #{tgLeaderTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="tgLessonLeaderId != null">
+        #{tgLessonLeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="tgLessonLeader != null">
+        #{tgLessonLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tgTeacherNumber != null">
+        #{tgTeacherNumber,jdbcType=INTEGER},
+      </if>
+      <if test="tgCode != null">
+        #{tgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="courseDiscipline != null">
+        #{courseDiscipline,jdbcType=VARCHAR},
+      </if>
+      <if test="tgCourseName != null">
+        #{tgCourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="tgStartTime != null">
+        #{tgStartTime,jdbcType=DATE},
+      </if>
+      <if test="tgEndTime != null">
+        #{tgEndTime,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStatus != null">
+        #{sysStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="effective != null">
+        #{effective,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherGroupExample" resultType="java.lang.Long">
+    select count(*) from teacher_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update teacher_group
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tgName != null">
+        tg_name = #{record.tgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tgLeaderId != null">
+        tg_leader_id = #{record.tgLeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tgLeader != null">
+        tg_leader = #{record.tgLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tgLeaderTwoId != null">
+        tg_leader_two_id = #{record.tgLeaderTwoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tgLeaderTwo != null">
+        tg_leader_two = #{record.tgLeaderTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tgLessonLeaderId != null">
+        tg_lesson_leader_id = #{record.tgLessonLeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tgLessonLeader != null">
+        tg_lesson_leader = #{record.tgLessonLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tgTeacherNumber != null">
+        tg_teacher_number = #{record.tgTeacherNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.tgCode != null">
+        tg_code = #{record.tgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseDiscipline != null">
+        course_discipline = #{record.courseDiscipline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tgCourseName != null">
+        tg_course_name = #{record.tgCourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tgStartTime != null">
+        tg_start_time = #{record.tgStartTime,jdbcType=DATE},
+      </if>
+      <if test="record.tgEndTime != null">
+        tg_end_time = #{record.tgEndTime,jdbcType=DATE},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysStatus != null">
+        sys_status = #{record.sysStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effective != null">
+        effective = #{record.effective,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update teacher_group
+    set id = #{record.id,jdbcType=BIGINT},
+      tg_name = #{record.tgName,jdbcType=VARCHAR},
+      tg_leader_id = #{record.tgLeaderId,jdbcType=BIGINT},
+      tg_leader = #{record.tgLeader,jdbcType=VARCHAR},
+      tg_leader_two_id = #{record.tgLeaderTwoId,jdbcType=BIGINT},
+      tg_leader_two = #{record.tgLeaderTwo,jdbcType=VARCHAR},
+      tg_lesson_leader_id = #{record.tgLessonLeaderId,jdbcType=BIGINT},
+      tg_lesson_leader = #{record.tgLessonLeader,jdbcType=VARCHAR},
+      tg_teacher_number = #{record.tgTeacherNumber,jdbcType=INTEGER},
+      tg_code = #{record.tgCode,jdbcType=VARCHAR},
+      course_discipline = #{record.courseDiscipline,jdbcType=VARCHAR},
+      tg_course_name = #{record.tgCourseName,jdbcType=VARCHAR},
+      tg_start_time = #{record.tgStartTime,jdbcType=DATE},
+      tg_end_time = #{record.tgEndTime,jdbcType=DATE},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      sys_status = #{record.sysStatus,jdbcType=VARCHAR},
+      effective = #{record.effective,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherGroup">
+    update teacher_group
+    <set>
+      <if test="tgName != null">
+        tg_name = #{tgName,jdbcType=VARCHAR},
+      </if>
+      <if test="tgLeaderId != null">
+        tg_leader_id = #{tgLeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="tgLeader != null">
+        tg_leader = #{tgLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tgLeaderTwoId != null">
+        tg_leader_two_id = #{tgLeaderTwoId,jdbcType=BIGINT},
+      </if>
+      <if test="tgLeaderTwo != null">
+        tg_leader_two = #{tgLeaderTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="tgLessonLeaderId != null">
+        tg_lesson_leader_id = #{tgLessonLeaderId,jdbcType=BIGINT},
+      </if>
+      <if test="tgLessonLeader != null">
+        tg_lesson_leader = #{tgLessonLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tgTeacherNumber != null">
+        tg_teacher_number = #{tgTeacherNumber,jdbcType=INTEGER},
+      </if>
+      <if test="tgCode != null">
+        tg_code = #{tgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="courseDiscipline != null">
+        course_discipline = #{courseDiscipline,jdbcType=VARCHAR},
+      </if>
+      <if test="tgCourseName != null">
+        tg_course_name = #{tgCourseName,jdbcType=VARCHAR},
+      </if>
+      <if test="tgStartTime != null">
+        tg_start_time = #{tgStartTime,jdbcType=DATE},
+      </if>
+      <if test="tgEndTime != null">
+        tg_end_time = #{tgEndTime,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sysStatus != null">
+        sys_status = #{sysStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="effective != null">
+        effective = #{effective,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherGroup">
+    update teacher_group
+    set tg_name = #{tgName,jdbcType=VARCHAR},
+      tg_leader_id = #{tgLeaderId,jdbcType=BIGINT},
+      tg_leader = #{tgLeader,jdbcType=VARCHAR},
+      tg_leader_two_id = #{tgLeaderTwoId,jdbcType=BIGINT},
+      tg_leader_two = #{tgLeaderTwo,jdbcType=VARCHAR},
+      tg_lesson_leader_id = #{tgLessonLeaderId,jdbcType=BIGINT},
+      tg_lesson_leader = #{tgLessonLeader,jdbcType=VARCHAR},
+      tg_teacher_number = #{tgTeacherNumber,jdbcType=INTEGER},
+      tg_code = #{tgCode,jdbcType=VARCHAR},
+      course_discipline = #{courseDiscipline,jdbcType=VARCHAR},
+      tg_course_name = #{tgCourseName,jdbcType=VARCHAR},
+      tg_start_time = #{tgStartTime,jdbcType=DATE},
+      tg_end_time = #{tgEndTime,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      sys_status = #{sysStatus,jdbcType=VARCHAR},
+      effective = #{effective,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

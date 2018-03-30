@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinayouthedu.zqzc.mapper.paike.TeacherCoursetimeMapper">
+  <resultMap id="BaseResultMap" type="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetime">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="school_year_id" jdbcType="BIGINT" property="schoolYearId" />
+    <result column="school_year_name" jdbcType="VARCHAR" property="schoolYearName" />
+    <result column="semester_id" jdbcType="BIGINT" property="semesterId" />
+    <result column="semester_name" jdbcType="VARCHAR" property="semesterName" />
+    <result column="teacher_group_id" jdbcType="BIGINT" property="teacherGroupId" />
+    <result column="teacher_group_name" jdbcType="VARCHAR" property="teacherGroupName" />
+    <result column="teacher_id" jdbcType="BIGINT" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="all_learn_time" jdbcType="INTEGER" property="allLearnTime" />
+    <result column="week_learn_time" jdbcType="INTEGER" property="weekLearnTime" />
+    <result column="min_week_learn_time" jdbcType="INTEGER" property="minWeekLearnTime" />
+    <result column="max_week_learn_time" jdbcType="INTEGER" property="maxWeekLearnTime" />
+    <result column="actual_course_time" jdbcType="INTEGER" property="actualCourseTime" />
+    <result column="teach_class_number" jdbcType="INTEGER" property="teachClassNumber" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="system_status" jdbcType="VARCHAR" property="systemStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, school_year_id, school_year_name, semester_id, semester_name, teacher_group_id, 
+    teacher_group_name, teacher_id, teacher_name, all_learn_time, week_learn_time, min_week_learn_time, 
+    max_week_learn_time, actual_course_time, teach_class_number, create_time, update_time, 
+    system_status
+  </sql>
+  <select id="selectByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetimeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teacher_coursetime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teacher_coursetime
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from teacher_coursetime
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetimeExample">
+    delete from teacher_coursetime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetime">
+    insert into teacher_coursetime (id, school_year_id, school_year_name, 
+      semester_id, semester_name, teacher_group_id, 
+      teacher_group_name, teacher_id, teacher_name, 
+      all_learn_time, week_learn_time, min_week_learn_time, 
+      max_week_learn_time, actual_course_time, teach_class_number, 
+      create_time, update_time, system_status
+      )
+    values (#{id,jdbcType=BIGINT}, #{schoolYearId,jdbcType=BIGINT}, #{schoolYearName,jdbcType=VARCHAR}, 
+      #{semesterId,jdbcType=BIGINT}, #{semesterName,jdbcType=VARCHAR}, #{teacherGroupId,jdbcType=BIGINT}, 
+      #{teacherGroupName,jdbcType=VARCHAR}, #{teacherId,jdbcType=BIGINT}, #{teacherName,jdbcType=VARCHAR}, 
+      #{allLearnTime,jdbcType=INTEGER}, #{weekLearnTime,jdbcType=INTEGER}, #{minWeekLearnTime,jdbcType=INTEGER}, 
+      #{maxWeekLearnTime,jdbcType=INTEGER}, #{actualCourseTime,jdbcType=INTEGER}, #{teachClassNumber,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{systemStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetime">
+    insert into teacher_coursetime
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="schoolYearId != null">
+        school_year_id,
+      </if>
+      <if test="schoolYearName != null">
+        school_year_name,
+      </if>
+      <if test="semesterId != null">
+        semester_id,
+      </if>
+      <if test="semesterName != null">
+        semester_name,
+      </if>
+      <if test="teacherGroupId != null">
+        teacher_group_id,
+      </if>
+      <if test="teacherGroupName != null">
+        teacher_group_name,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="allLearnTime != null">
+        all_learn_time,
+      </if>
+      <if test="weekLearnTime != null">
+        week_learn_time,
+      </if>
+      <if test="minWeekLearnTime != null">
+        min_week_learn_time,
+      </if>
+      <if test="maxWeekLearnTime != null">
+        max_week_learn_time,
+      </if>
+      <if test="actualCourseTime != null">
+        actual_course_time,
+      </if>
+      <if test="teachClassNumber != null">
+        teach_class_number,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="systemStatus != null">
+        system_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schoolYearId != null">
+        #{schoolYearId,jdbcType=BIGINT},
+      </if>
+      <if test="schoolYearName != null">
+        #{schoolYearName,jdbcType=VARCHAR},
+      </if>
+      <if test="semesterId != null">
+        #{semesterId,jdbcType=BIGINT},
+      </if>
+      <if test="semesterName != null">
+        #{semesterName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherGroupId != null">
+        #{teacherGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="teacherGroupName != null">
+        #{teacherGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=BIGINT},
+      </if>
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="allLearnTime != null">
+        #{allLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="weekLearnTime != null">
+        #{weekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="minWeekLearnTime != null">
+        #{minWeekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="maxWeekLearnTime != null">
+        #{maxWeekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="actualCourseTime != null">
+        #{actualCourseTime,jdbcType=INTEGER},
+      </if>
+      <if test="teachClassNumber != null">
+        #{teachClassNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemStatus != null">
+        #{systemStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetimeExample" resultType="java.lang.Long">
+    select count(*) from teacher_coursetime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update teacher_coursetime
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.schoolYearId != null">
+        school_year_id = #{record.schoolYearId,jdbcType=BIGINT},
+      </if>
+      <if test="record.schoolYearName != null">
+        school_year_name = #{record.schoolYearName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.semesterId != null">
+        semester_id = #{record.semesterId,jdbcType=BIGINT},
+      </if>
+      <if test="record.semesterName != null">
+        semester_name = #{record.semesterName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherGroupId != null">
+        teacher_group_id = #{record.teacherGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="record.teacherGroupName != null">
+        teacher_group_name = #{record.teacherGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherId != null">
+        teacher_id = #{record.teacherId,jdbcType=BIGINT},
+      </if>
+      <if test="record.teacherName != null">
+        teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allLearnTime != null">
+        all_learn_time = #{record.allLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.weekLearnTime != null">
+        week_learn_time = #{record.weekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.minWeekLearnTime != null">
+        min_week_learn_time = #{record.minWeekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxWeekLearnTime != null">
+        max_week_learn_time = #{record.maxWeekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.actualCourseTime != null">
+        actual_course_time = #{record.actualCourseTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.teachClassNumber != null">
+        teach_class_number = #{record.teachClassNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.systemStatus != null">
+        system_status = #{record.systemStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update teacher_coursetime
+    set id = #{record.id,jdbcType=BIGINT},
+      school_year_id = #{record.schoolYearId,jdbcType=BIGINT},
+      school_year_name = #{record.schoolYearName,jdbcType=VARCHAR},
+      semester_id = #{record.semesterId,jdbcType=BIGINT},
+      semester_name = #{record.semesterName,jdbcType=VARCHAR},
+      teacher_group_id = #{record.teacherGroupId,jdbcType=BIGINT},
+      teacher_group_name = #{record.teacherGroupName,jdbcType=VARCHAR},
+      teacher_id = #{record.teacherId,jdbcType=BIGINT},
+      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      all_learn_time = #{record.allLearnTime,jdbcType=INTEGER},
+      week_learn_time = #{record.weekLearnTime,jdbcType=INTEGER},
+      min_week_learn_time = #{record.minWeekLearnTime,jdbcType=INTEGER},
+      max_week_learn_time = #{record.maxWeekLearnTime,jdbcType=INTEGER},
+      actual_course_time = #{record.actualCourseTime,jdbcType=INTEGER},
+      teach_class_number = #{record.teachClassNumber,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      system_status = #{record.systemStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetime">
+    update teacher_coursetime
+    <set>
+      <if test="schoolYearId != null">
+        school_year_id = #{schoolYearId,jdbcType=BIGINT},
+      </if>
+      <if test="schoolYearName != null">
+        school_year_name = #{schoolYearName,jdbcType=VARCHAR},
+      </if>
+      <if test="semesterId != null">
+        semester_id = #{semesterId,jdbcType=BIGINT},
+      </if>
+      <if test="semesterName != null">
+        semester_name = #{semesterName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherGroupId != null">
+        teacher_group_id = #{teacherGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="teacherGroupName != null">
+        teacher_group_name = #{teacherGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=BIGINT},
+      </if>
+      <if test="teacherName != null">
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="allLearnTime != null">
+        all_learn_time = #{allLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="weekLearnTime != null">
+        week_learn_time = #{weekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="minWeekLearnTime != null">
+        min_week_learn_time = #{minWeekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="maxWeekLearnTime != null">
+        max_week_learn_time = #{maxWeekLearnTime,jdbcType=INTEGER},
+      </if>
+      <if test="actualCourseTime != null">
+        actual_course_time = #{actualCourseTime,jdbcType=INTEGER},
+      </if>
+      <if test="teachClassNumber != null">
+        teach_class_number = #{teachClassNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemStatus != null">
+        system_status = #{systemStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinayouthedu.zqzc.entity.paike.TeacherCoursetime">
+    update teacher_coursetime
+    set school_year_id = #{schoolYearId,jdbcType=BIGINT},
+      school_year_name = #{schoolYearName,jdbcType=VARCHAR},
+      semester_id = #{semesterId,jdbcType=BIGINT},
+      semester_name = #{semesterName,jdbcType=VARCHAR},
+      teacher_group_id = #{teacherGroupId,jdbcType=BIGINT},
+      teacher_group_name = #{teacherGroupName,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=BIGINT},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
+      all_learn_time = #{allLearnTime,jdbcType=INTEGER},
+      week_learn_time = #{weekLearnTime,jdbcType=INTEGER},
+      min_week_learn_time = #{minWeekLearnTime,jdbcType=INTEGER},
+      max_week_learn_time = #{maxWeekLearnTime,jdbcType=INTEGER},
+      actual_course_time = #{actualCourseTime,jdbcType=INTEGER},
+      teach_class_number = #{teachClassNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      system_status = #{systemStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
